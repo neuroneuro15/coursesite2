@@ -3,5 +3,12 @@
 {% block title %}SciPy Course Home Page{% endblock %}
 
 {% block content %}
-        <h1>This is the index page</h1>
+    <h1>This is the index page! </h1>
+    <ul>
+        {% for lecnum in range(1, tot_lectures + 1 )%}
+            <li><a href="course/{{ lecnum }}">Lesson {{ lecnum }}</a></li>
+        {% endfor %}
+    </ul>
+
+
 {% endblock %}l
