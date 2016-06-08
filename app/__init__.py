@@ -11,30 +11,23 @@ app.config.from_object('config')
 
 Bootstrap(app)
 
-# Random Functions
-def count_total_lectures():
-    staturl = glob(path.join(app.static_folder, 'pycourse/lessons/*'))
-    print(staturl)
-    return len(staturl)
-
 
 slide_dir = path.join(app.static_folder, 'pycourse', 'lessons')
+slides = [glob(path.join(slide_dir, dd, '*.slides.html'))[0] for dd in os.listdir(slide_dir)]
+slides = sorted(slides)
+
 
 # Routing
 @app.route('/')
 def hello_world():
-    tot_lectures = count_total_lectures()
-    print(tot_lectures)
-    return render_template('index.html', tot_lectures=tot_lectures)
+    slide_names = [path.dirname(slide).split('/')[-1].split('_')[1] for slide in slides]
+    print(slide_names)
+    return render_template('index.html', slides=slide_names)
 
 @app.route('/<int:lecnum>')
 def lecture(lecnum):
-    # names = os.listdir(slide_dir)
-    names = [glob(path.join(slide_dir, dd, '*.slides.html'))[0] for dd in os.listdir(slide_dir)]
-    print(names)
-    # return 'success'
-    return send_from_directory(path.dirname(names[lecnum-1]),
-                               filename=path.basename(names[lecnum-1]))
+    return send_from_directory(path.dirname(slides[lecnum-1]),
+                               filename=path.basename(slides[lecnum-1]))
 
 
 

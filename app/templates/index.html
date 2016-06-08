@@ -17,7 +17,7 @@
                     <!-- Lessons List -->
                     <ul class="timeline">
 
-                        {% for lecnum in range(1, tot_lectures + 1 ) %}
+                        {% for slide in slides %}
                             hi
 
                         <li>
@@ -26,8 +26,8 @@
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4 class="subheading"><a href="/{{ lecnum }}">Lesson {{ lecnum }}</a></h4>
-                                    <h4>Homework {{ lecnum }}</h4>
+                                    <h4 class="subheading"><a href="/{{ loop.index }}">Lesson {{ loop.index }}: {{ slide }}</a></h4>
+                                    <h4>Homework {{ loop.index }}</h4>
                                 </div>
                                 <div class="timeline-body">
                                     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
