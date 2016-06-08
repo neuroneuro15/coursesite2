@@ -29,24 +29,15 @@ def hello_world():
 
 @app.route('/<int:lecnum>')
 def lecture(lecnum):
-
-    # return render_template('Python Course Lecture 2.slides.html')
-    # return app.send_static_file('lecture1s.html')
-    # return render_template('lecture1.html')
-
-    #   jupyter nbconvert --to slides Note: when converting to slides in nbconvert, remember to add
-    # --reveal-prefix "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.1.0"
-
-    # slides = glob(path.join(slide_dir, '*.slides.html'))
-    # slides = [path.basename(name) for name in sorted(slides)]
-    # print(slides)
-    # print(slides[lecnum - 1])
-    new_path = path.join(slide_dir, 'Errors/')
-    print(new_path)
-    return send_from_directory(new_path, filename='lecture7a.slides.html')
+    # names = os.listdir(slide_dir)
+    names = [glob(path.join(slide_dir, dd, '*.slides.html'))[0] for dd in os.listdir(slide_dir)]
+    print(names)
+    # return 'success'
+    return send_from_directory(path.dirname(names[lecnum-1]),
+                               filename=path.basename(names[lecnum-1]))
 
 
 
 @app.route('/format')
 def code_format_test():
-    return render_template('pretty.html')
+    return render_template('base.html')
