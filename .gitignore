@@ -90,3 +90,4 @@ ENV/
 
 # Pycharm project Settings
 .idea
+.ipynb_checkpoints
